@@ -37,14 +37,12 @@ Po uruchomieniu pojawia się okno wyboru trybu — **Obrazy** lub **PDF-y**.
 
 | Klawisz | Akcja |
 |---------|-------|
-| `Z` / `1` | Zostaw plik, przejdź dalej |
-| `U` / `3` | Usuń plik, przejdź dalej |
-| `P` / `8` | Cofnij ostatnie usunięcie |
-| `2` | Następna strona PDF |
-| `8` | Poprzednia strona PDF (tylko tryb PDF) |
+| `A` / `4` | Zostaw plik, przejdź dalej |
+| `D` / `6` | Usuń plik, przejdź dalej |
+| `Q` / `7` | Cofnij ostatnie usunięcie |
+| `S` / `5` | Następna strona PDF (tylko tryb PDF) |
+| `W` / `8` | Poprzednia strona PDF (tylko tryb PDF) |
 | `Esc` | Zamknij aplikację |
-
-> Uwaga: klawisz `8` cofa usunięcie w trybie obrazów, a przewija strony w trybie PDF.
 
 ## Obsługiwane formaty
 

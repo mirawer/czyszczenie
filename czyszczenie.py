@@ -162,16 +162,18 @@ class App:
         )
         self.info_label.pack(fill="x", side="bottom")
 
-        root.bind("<z>", lambda e: self.on_key_keep())
-        root.bind("<Z>", lambda e: self.on_key_keep())
-        root.bind("<1>", lambda e: self.on_key_keep())
-        root.bind("<KP_1>", lambda e: self.on_key_keep())
-        root.bind("<u>", lambda e: self.on_key_delete())
-        root.bind("<U>", lambda e: self.on_key_delete())
-        root.bind("<3>", lambda e: self.on_key_delete())
-        root.bind("<KP_3>", lambda e: self.on_key_delete())
-        root.bind("<p>", lambda e: self.on_key_restore())
-        root.bind("<P>", lambda e: self.on_key_restore())
+        root.bind("<a>", lambda e: self.on_key_keep())
+        root.bind("<A>", lambda e: self.on_key_keep())
+        root.bind("<4>", lambda e: self.on_key_keep())
+        root.bind("<KP_4>", lambda e: self.on_key_keep())
+        root.bind("<d>", lambda e: self.on_key_delete())
+        root.bind("<D>", lambda e: self.on_key_delete())
+        root.bind("<6>", lambda e: self.on_key_delete())
+        root.bind("<KP_6>", lambda e: self.on_key_delete())
+        root.bind("<q>", lambda e: self.on_key_restore())
+        root.bind("<Q>", lambda e: self.on_key_restore())
+        root.bind("<7>", lambda e: self.on_key_restore())
+        root.bind("<KP_7>", lambda e: self.on_key_restore())
         root.bind("<Escape>", lambda e: self.quit())
         root.bind("<Configure>", lambda e: self.on_resize())
 
@@ -183,11 +185,12 @@ class App:
         if mode == "pdfs":
             root.bind("<8>", lambda e: self.pdf_prev_page())
             root.bind("<KP_8>", lambda e: self.pdf_prev_page())
-            root.bind("<2>", lambda e: self.pdf_next_page())
-            root.bind("<KP_2>", lambda e: self.pdf_next_page())
-        else:
-            root.bind("<8>", lambda e: self.on_key_restore())
-            root.bind("<KP_8>", lambda e: self.on_key_restore())
+            root.bind("<w>", lambda e: self.pdf_prev_page())
+            root.bind("<W>", lambda e: self.pdf_prev_page())
+            root.bind("<5>", lambda e: self.pdf_next_page())
+            root.bind("<KP_5>", lambda e: self.pdf_next_page())
+            root.bind("<s>", lambda e: self.pdf_next_page())
+            root.bind("<S>", lambda e: self.pdf_next_page())
 
         self.show_current()
 
@@ -303,10 +306,7 @@ class App:
         )
         total = len(self.images)
 
-        if self.mode == "pdfs":
-            historia_info = "  [P] Cofnij usunięcie" if self.history else ""
-        else:
-            historia_info = "  [P / 8] Cofnij usunięcie" if self.history else ""
+        historia_info = "  [Q / 7] Cofnij usunięcie" if self.history else ""
 
         try:
             photo = self.load_image(path)
@@ -323,12 +323,12 @@ class App:
 
         self.filename_label.configure(text=f"{filename}   •   {date_str}")
         if self.mode == "pdfs":
-            scroll_info = f"   [2] Następna str.   [8] Poprzednia str.   ({self.pdf_page + 1}/{self.pdf_page_count})"
+            scroll_info = f"   [S / 5] Następna str.   [W / 8] Poprzednia str.   ({self.pdf_page + 1}/{self.pdf_page_count})"
         else:
             scroll_info = ""
         self.info_label.configure(
             text=f"[{self.index + 1} / {total}]   "
-            f"[Z / 1] Zostaw   [U / 3] Usuń"
+            f"[A / 4] Zostaw   [D / 6] Usuń"
             f"{scroll_info}"
             f"{historia_info}   |   "
             f"Zostawiono: {self.kept}   Usunięto: {self.deleted}"
@@ -338,7 +338,7 @@ class App:
         if self.finished or not self._current_path:
             return
         total = len(self.images)
-        historia_info = "  [P] Cofnij usunięcie" if self.history else ""
+        historia_info = "  [Q / 7] Cofnij usunięcie" if self.history else ""
         filename = os.path.relpath(self._current_path, PICTURES_DIR)
         date_str = datetime.fromtimestamp(
             os.path.getmtime(self._current_path)
@@ -346,8 +346,8 @@ class App:
         self.filename_label.configure(text=f"{filename}   •   {date_str}")
         self.info_label.configure(
             text=f"[{self.index + 1} / {total}]   "
-            f"[Z / 1] Zostaw   [U / 3] Usuń"
-            f"   [2] Następna str.   [8] Poprzednia str.   ({self.pdf_page + 1}/{self.pdf_page_count})"
+            f"[A / 4] Zostaw   [D / 6] Usuń"
+            f"   [S / 5] Następna str.   [W / 8] Poprzednia str.   ({self.pdf_page + 1}/{self.pdf_page_count})"
             f"{historia_info}   |   "
             f"Zostawiono: {self.kept}   Usunięto: {self.deleted}"
         )
@@ -362,7 +362,7 @@ class App:
     def finish(self):
         self.finished = True
         self._current_path = None
-        historia_info = "   [P / 8] Cofnij ostatnie usunięcie" if self.history else ""
+        historia_info = "   [Q / 7] Cofnij ostatnie usunięcie" if self.history else ""
         self._photo = None
         self.image_label.configure(
             image="", text="Gotowe!", fg="white", font=("monospace", 42)
@@ -371,7 +371,7 @@ class App:
         self.info_label.configure(
             text=f"Zostawiono: {self.kept}   Usunięto: {self.deleted}"
             f"{historia_info}   |   "
-            f"[Z / 1 / U / 3] Zakończ   [ESC] Zakończ"
+            f"[A / 4 / D / 6] Zakończ   [ESC] Zakończ"
         )
 
 
